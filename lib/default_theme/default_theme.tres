@@ -1,0 +1,19 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://buclk0ly46ywm"]
+
+[ext_resource type="FontFile" uid="uid://dc1msvstec77f" path="res://asset/font/VT323-Regular.ttf" id="1_so5tp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65qxk"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[resource]
+default_font = ExtResource("1_so5tp")
+default_font_size = 16
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_65qxk")

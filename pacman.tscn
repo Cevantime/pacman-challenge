@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://htyi7y2od3jc"]
+
+[ext_resource type="Script" path="res://pacman.gd" id="1_hf5wl"]
+[ext_resource type="Texture2D" uid="uid://bsi3m7cn3tggb" path="res://asset/pacman/half_pacman.png" id="1_xv0j0"]
+
+[sub_resource type="Animation" id="Animation_q8msc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Rendering/MouthUpSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.1309]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Rendering/MouthDownSprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.1309]
+}
+
+[sub_resource type="Animation" id="Animation_hf5wl"]
+resource_name = "eat"
+length = 0.25
+loop_mode = 1
+step = 0.0625
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Rendering/MouthUpSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [-0.1309, 0.0, -0.1309, -0.261799]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Rendering/MouthDownSprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0625, 0.125, 0.1875),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.1309, 0.0, 0.1309, 0.261799]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q8msc"]
+_data = {
+&"RESET": SubResource("Animation_q8msc"),
+&"eat": SubResource("Animation_hf5wl")
+}
+
+[node name="Pacman" type="Node2D"]
+script = ExtResource("1_hf5wl")
+
+[node name="Pivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Rendering" type="Node2D" parent="Pivot"]
+position = Vector2(-12, 0)
+
+[node name="MouthUpSprite2D" type="Sprite2D" parent="Pivot/Rendering"]
+rotation = -0.1309
+texture = ExtResource("1_xv0j0")
+offset = Vector2(12, 0)
+
+[node name="MouthDownSprite2D2" type="Sprite2D" parent="Pivot/Rendering"]
+rotation = 0.1309
+scale = Vector2(1, -1)
+texture = ExtResource("1_xv0j0")
+offset = Vector2(12, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_q8msc")
+}

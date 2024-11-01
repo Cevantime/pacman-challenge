@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuvjhwp2a5q2t"]
+
+[ext_resource type="Script" path="res://addons/leader_board/high_score_panel.gd" id="1_sw557"]
+
+[node name="HighScoreContainer" type="VBoxContainer"]
+script = ExtResource("1_sw557")

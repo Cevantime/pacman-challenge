@@ -1,0 +1,126 @@
+{
+	"categories": [
+		{
+			"uuid": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"title": "Task",
+			"color": "70bafa"
+		}
+	],
+	"stages": [
+		{
+			"uuid": "91d7d516-21cd-425e-8a77-827e2b8b751f",
+			"title": "Todo",
+			"tasks": [
+				"414b68ac-7c68-476c-98c6-c0233d3d2471",
+				"28707b83-ada5-470e-9bb6-2dd89b562c93",
+				"bb385bc2-736d-46a2-83ef-a785cdba00eb",
+				"9c93d92e-c550-4206-89b7-ff00b436e030"
+			]
+		},
+		{
+			"uuid": "c3721904-ed76-451f-9348-c3def44e5a99",
+			"title": "Doing",
+			"tasks": [
+				"456f1abd-4c48-456f-a9d5-37a9afa93d0f"
+			]
+		},
+		{
+			"uuid": "ec1b36c5-f6b2-42f4-9164-dd9fe226678b",
+			"title": "Done",
+			"tasks": [
+				"52028cca-f974-44a9-b6d4-726898a92015",
+				"70ae320a-9c70-4565-8ba1-5a39d21887eb"
+			]
+		}
+	],
+	"tasks": [
+		{
+			"uuid": "52028cca-f974-44a9-b6d4-726898a92015",
+			"title": "Create the Pac-Man maze",
+			"description": "Place a score and high score counter above the level, and a life counter below. The maze operates on a grid. There is a tunnel that allows Pac-Man and the ghosts to wrap across the screen, appearing on the other side. ",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": [
+				{
+					"details": "Fill the maze with dots and four large dots (Power Pellets). Each cell in the grid will contain a dot or power pellet.",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "70ae320a-9c70-4565-8ba1-5a39d21887eb",
+			"title": "Create Pac-Man himself.",
+			"description": "He should be able to move in four directions through the maze. When Pac-Man collides with a dot, he will eat it, increasing the score.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "456f1abd-4c48-456f-a9d5-37a9afa93d0f",
+			"title": "Add four ghosts.",
+			"description": "They will chase Pac-Man through the level. The ghosts start in a “pen” and are released after enough dots are eaten. Each ghost will cycle between “chase mode” and “scatter mode.” During chase mode, the ghosts will move toward specific cells to give the illusion of teamwork and intelligence. \n\nreference : https://gameinternals.com/understanding-pac-man-ghost-behavior",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": [
+				{
+					"details": "Red ghost “Blinky” will target Pac-Man directly.",
+					"done": false
+				},
+				{
+					"details": "Pink ghost “Pinky” will try to get 4 tiles in front of Pac-Man.",
+					"done": false
+				},
+				{
+					"details": "Blue ghost “Inky” will target a special position. Draw a line from Blinky’s position to the cell two tiles in front of Pac-Man, then double the length of the line. That is Inky’s target position.",
+					"done": false
+				},
+				{
+					"details": "Orange ghost “Clyde” will target Pac-Man directly, but will scatter whenever he gets within an 8 tile radius of Pac-Man.",
+					"done": false
+				},
+				{
+					"details": "Each ghost has an assigned corner that it will scatter to during scatter mode.",
+					"done": false
+				}
+			]
+		},
+		{
+			"uuid": "414b68ac-7c68-476c-98c6-c0233d3d2471",
+			"title": "Add the “power pellet” mode. ",
+			"description": "When Pac-man eats the pellet, the ghosts will turn blue (scared), and will scatter. Pac-Man can eat the ghosts. After a timer elapses, the ghosts will flash white, then return to normal. Eaten ghosts will award points, turn into eyes, and then return to the pen before coming back as regular ghosts.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "28707b83-ada5-470e-9bb6-2dd89b562c93",
+			"title": "Add the win states and lose states.",
+			"description": "Pac-Man will die when eaten by a ghost, consuming a life. When all dots are consumed, the level will reset.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "bb385bc2-736d-46a2-83ef-a785cdba00eb",
+			"title": "Feel free to customize the maze",
+			"description": "add more/different AI behaviors, or add more levels.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "9c93d92e-c550-4206-89b7-ff00b436e030",
+			"title": "Add fruit pickups.",
+			"description": "Fruit appears after enough dots are eaten, and awards bonus points.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		}
+	],
+	"layout": {
+		"columns": [
+			[
+				"91d7d516-21cd-425e-8a77-827e2b8b751f"
+			],
+			[
+				"c3721904-ed76-451f-9348-c3def44e5a99"
+			],
+			[
+				"ec1b36c5-f6b2-42f4-9164-dd9fe226678b"
+			]
+		]
+	}
+}

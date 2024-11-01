@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://527vhs5lwf5l"]
+
+[ext_resource type="PackedScene" uid="uid://dq84yffvpx7ka" path="res://lib/spawners/basic_spawner.tscn" id="1_h4dnx"]
+[ext_resource type="Script" path="res://lib/spawners/timed_spawner.gd" id="2_4bvhg"]
+
+[node name="TimedSpawner" instance=ExtResource("1_h4dnx")]
+script = ExtResource("2_4bvhg")
+initial_spawn = true
+wait_time = 1.0
+
+[node name="Timer" type="Timer" parent="." index="0"]
+unique_name_in_owner = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

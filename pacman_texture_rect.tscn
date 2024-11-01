@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dea3ntr04sq2p"]
+
+[ext_resource type="Texture2D" uid="uid://cm2qevt635gar" path="res://asset/ui/pacman_icon.png" id="1_1gqbg"]
+
+[node name="TextureRect" type="TextureRect"]
+texture = ExtResource("1_1gqbg")
+stretch_mode = 5
