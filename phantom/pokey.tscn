@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8546xsfx3rbx"]
+
+[ext_resource type="PackedScene" uid="uid://b3uwsfrxm74k2" path="res://phantom/phantom.tscn" id="1_o4nhc"]
+[ext_resource type="Script" path="res://phantom/pokey.gd" id="2_d5yre"]
+
+[node name="Pokey" groups=["pokey"] instance=ExtResource("1_o4nhc")]
+script = ExtResource("2_d5yre")
+nickname = "pokey"
+
+[node name="SpriteBody" parent="Rendering" index="0"]
+modulate = Color(1, 0.496557, 0.314157, 1)

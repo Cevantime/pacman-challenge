@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctpacm35t46o"]
+
+[ext_resource type="Texture2D" uid="uid://sfjup4w437b5" path="res://asset/bonus/cherries.png" id="1_c14hm"]
+
+[node name="TextureRect" type="TextureRect"]
+texture = ExtResource("1_c14hm")
+stretch_mode = 5

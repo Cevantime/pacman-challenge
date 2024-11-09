@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ck3obtkkq5bld"]
+
+[ext_resource type="PackedScene" uid="uid://b3uwsfrxm74k2" path="res://phantom/phantom.tscn" id="1_nd31e"]
+[ext_resource type="Script" path="res://phantom/speedy.gd" id="2_4thq8"]
+
+[node name="Speedy" instance=ExtResource("1_nd31e")]
+script = ExtResource("2_4thq8")
+nickname = "speedy"
+
+[node name="SpriteBody" parent="Rendering" index="0"]
+modulate = Color(1, 0, 1, 1)

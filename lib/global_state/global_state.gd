@@ -2,10 +2,7 @@ extends Node
 
 signal score_updated(score, old)
 signal lives_updated(lives, old)
-signal wave_updated(wave, old)
-signal warp_updated(warp, old)
-signal bomb_updated(bomb, old)
-
+signal level_updated(level, old)
 
 var score = 0:
 	set(v):
@@ -20,31 +17,19 @@ var lives = 3:
 		lives = v
 		lives_updated.emit(lives, old)
 		
-		
-var wave = 0:
+var level = 0:
 	set(v):
-		var old = wave
-		wave = v
-		wave_updated.emit(wave, old)
-		
-var warp = 3:
-	set(v):
-		var old = warp
-		warp = v
-		warp_updated.emit(warp, old)
-		
-		
-var bomb = 1:
-	set(v):
-		var old = bomb
-		bomb = v
-		bomb_updated.emit(bomb, old)
+		var old = level
+		level = v
+		level_updated.emit(level, old)
 		
 var highest_score:
 	get:
 		if highest_score == null:
 			return score
 		return max(score, highest_score)
+		
+var first_intro = true
 
 func _ready():
 	highest_score = LeaderBoard.get_highest_score()

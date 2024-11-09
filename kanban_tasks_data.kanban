@@ -11,25 +11,26 @@
 			"uuid": "91d7d516-21cd-425e-8a77-827e2b8b751f",
 			"title": "Todo",
 			"tasks": [
-				"414b68ac-7c68-476c-98c6-c0233d3d2471",
-				"28707b83-ada5-470e-9bb6-2dd89b562c93",
 				"bb385bc2-736d-46a2-83ef-a785cdba00eb",
-				"9c93d92e-c550-4206-89b7-ff00b436e030"
+				"9b4699d3-c1c8-44ac-9a61-963e2ffc8793"
 			]
 		},
 		{
 			"uuid": "c3721904-ed76-451f-9348-c3def44e5a99",
 			"title": "Doing",
-			"tasks": [
-				"456f1abd-4c48-456f-a9d5-37a9afa93d0f"
-			]
+			"tasks": []
 		},
 		{
 			"uuid": "ec1b36c5-f6b2-42f4-9164-dd9fe226678b",
 			"title": "Done",
 			"tasks": [
 				"52028cca-f974-44a9-b6d4-726898a92015",
-				"70ae320a-9c70-4565-8ba1-5a39d21887eb"
+				"70ae320a-9c70-4565-8ba1-5a39d21887eb",
+				"456f1abd-4c48-456f-a9d5-37a9afa93d0f",
+				"414b68ac-7c68-476c-98c6-c0233d3d2471",
+				"341376d3-1cfe-4f13-8749-81a77a27c043",
+				"28707b83-ada5-470e-9bb6-2dd89b562c93",
+				"9c93d92e-c550-4206-89b7-ff00b436e030"
 			]
 		}
 	],
@@ -61,23 +62,23 @@
 			"steps": [
 				{
 					"details": "Red ghost “Blinky” will target Pac-Man directly.",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Pink ghost “Pinky” will try to get 4 tiles in front of Pac-Man.",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Blue ghost “Inky” will target a special position. Draw a line from Blinky’s position to the cell two tiles in front of Pac-Man, then double the length of the line. That is Inky’s target position.",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Orange ghost “Clyde” will target Pac-Man directly, but will scatter whenever he gets within an 8 tile radius of Pac-Man.",
-					"done": false
+					"done": true
 				},
 				{
 					"details": "Each ghost has an assigned corner that it will scatter to during scatter mode.",
-					"done": false
+					"done": true
 				}
 			]
 		},
@@ -106,6 +107,20 @@
 			"uuid": "9c93d92e-c550-4206-89b7-ff00b436e030",
 			"title": "Add fruit pickups.",
 			"description": "Fruit appears after enough dots are eaten, and awards bonus points.",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "341376d3-1cfe-4f13-8749-81a77a27c043",
+			"title": "Adjust counters",
+			"description": "",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "9b4699d3-c1c8-44ac-9a61-963e2ffc8793",
+			"title": "Dimensions",
+			"description": "Classic : 896x1152\nGoogle : 1872*704",
 			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
 			"steps": []
 		}

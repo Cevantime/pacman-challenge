@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j43jkvmlenmu"]
+
+[ext_resource type="Script" path="res://lib/debug/fps_label.gd" id="1_0j7e2"]
+
+[node name="FPSLabel" type="Label"]
+script = ExtResource("1_0j7e2")

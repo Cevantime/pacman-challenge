@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://h4076kiphahq"]
+[gd_scene load_steps=5 format=3 uid="uid://h4076kiphahq"]
 
 [ext_resource type="Theme" uid="uid://buclk0ly46ywm" path="res://lib/default_theme/default_theme.tres" id="1_fyqef"]
 [ext_resource type="PackedScene" uid="uid://dea3ntr04sq2p" path="res://pacman_texture_rect.tscn" id="2_27fn8"]
 [ext_resource type="Script" path="res://ui.gd" id="2_m6e0p"]
+[ext_resource type="PackedScene" uid="uid://ctpacm35t46o" path="res://bonus_texture_rect.tscn" id="3_nltto"]
 
 [node name="UILayer" type="CanvasLayer"]
 script = ExtResource("2_m6e0p")
 pacman_texture_packed = ExtResource("2_27fn8")
+bonus_texture_packed = ExtResource("3_nltto")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -38,13 +40,13 @@ vertical_alignment = 1
 
 [node name="HighScoreContainer" type="VBoxContainer" parent="UI"]
 layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -96.0
-offset_right = -31.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -32.5
+offset_right = 32.5
 offset_bottom = 54.0
-grow_horizontal = 0
+grow_horizontal = 2
 
 [node name="HighScoreLabel" type="Label" parent="UI/HighScoreContainer"]
 layout_mode = 2
@@ -70,4 +72,15 @@ offset_left = 32.0
 offset_top = -30.0
 offset_right = 80.0
 offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="BonusHBoxContainer" type="HBoxContainer" parent="UI"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 68.0
 grow_vertical = 0

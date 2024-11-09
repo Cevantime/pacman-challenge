@@ -1,0 +1,501 @@
+[gd_scene load_steps=20 format=3 uid="uid://bh2hgwyeueb2i"]
+
+[ext_resource type="Script" path="res://intro_layer.gd" id="1_dd3i3"]
+[ext_resource type="Theme" uid="uid://buclk0ly46ywm" path="res://lib/default_theme/default_theme.tres" id="2_vcyja"]
+[ext_resource type="Texture2D" uid="uid://dmb0y25lr1oev" path="res://asset/phantom/blinky.png" id="3_d8n41"]
+[ext_resource type="Texture2D" uid="uid://y2u2esrjp4wm" path="res://asset/phantom/speedy.png" id="4_j6on6"]
+[ext_resource type="Texture2D" uid="uid://bubrjj3x4f16f" path="res://asset/phantom/bashful.png" id="5_nlgih"]
+[ext_resource type="Texture2D" uid="uid://f3yiyypfns20" path="res://asset/phantom/pokey.png" id="6_nlgih"]
+[ext_resource type="Texture2D" uid="uid://bjxall1gwmbi2" path="res://asset/ui/dots-texture.png" id="7_2mbqw"]
+[ext_resource type="Texture2D" uid="uid://dbifx7h2h3ia2" path="res://asset/pacman/pacman-sheet.png" id="7_n5wuq"]
+[ext_resource type="Texture2D" uid="uid://c84heha4u4h56" path="res://asset/ui/poxerup-texture.png" id="8_phbiq"]
+
+[sub_resource type="Animation" id="Animation_phbiq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2mbqw"]
+resource_name = "bliking"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0qrr1"]
+_data = {
+&"RESET": SubResource("Animation_phbiq"),
+&"bliking": SubResource("Animation_2mbqw")
+}
+
+[sub_resource type="Animation" id="Animation_rhrnx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SpritePacman:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0qrr1"]
+resource_name = "eat"
+length = 0.3125
+loop_mode = 1
+step = 0.0313
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SpritePacman:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0313, 0.0626, 0.0939, 0.1252, 0.1565, 0.1878, 0.2191, 0.2504, 0.2817),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(4, 0), Vector2i(5, 0), Vector2i(4, 0), Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_py3wb"]
+_data = {
+&"RESET": SubResource("Animation_rhrnx"),
+&"eat": SubResource("Animation_0qrr1")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2mbqw"]
+
+[sub_resource type="Animation" id="Animation_h0fo2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpritePacman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(248, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blinky:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(296, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bashful:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(336, -40)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pokey:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(368, -40)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Speedy:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(368, -40)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pokey:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_n5wuq"]
+resource_name = "walk"
+length = 18.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpritePacman:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(104, -40), Vector2(-1216, -40)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blinky:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(296, -40), Vector2(-1168, -40)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Bashful:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(336, -40), Vector2(-1128, -40)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Pokey:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 11.25, 14.25, 17.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(456, -40), Vector2(-184, -40), Vector2(-184, -40), Vector2(80, -40)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Speedy:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(368, -40), Vector2(-984, -40)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Pokey:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 12.2, 13, 13.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-1, 1), Vector2(1, 1), Vector2(-1, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phbiq"]
+_data = {
+&"RESET": SubResource("Animation_h0fo2"),
+&"walk": SubResource("Animation_n5wuq")
+}
+
+[node name="IntroLayer" type="CanvasLayer"]
+script = ExtResource("1_dd3i3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_vcyja")
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.5
+offset_right = 41.5
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="HighScoreLabel" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+text = "High Score"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HighScoreValueLabel" type="Label" parent="ColorRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -133.0
+offset_top = -184.0
+offset_right = 133.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 15
+columns = 4
+
+[node name="Control" type="Control" parent="ColorRect/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ColorRect/GridContainer"]
+layout_mode = 2
+text = "Character"
+
+[node name="Label2" type="Label" parent="ColorRect/GridContainer"]
+layout_mode = 2
+text = "/"
+
+[node name="Label3" type="Label" parent="ColorRect/GridContainer"]
+layout_mode = 2
+text = "Nickname"
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("3_d8n41")
+
+[node name="Label4" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(0.980392, 0, 0, 1)
+layout_mode = 2
+text = "- Shadow"
+
+[node name="Control2" type="Control" parent="ColorRect/GridContainer"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(0.980392, 0, 0, 1)
+layout_mode = 2
+text = "\"Blinky\""
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("4_j6on6")
+
+[node name="Label6" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(1, 0, 1, 1)
+layout_mode = 2
+text = "- Speedy"
+
+[node name="Control3" type="Control" parent="ColorRect/GridContainer"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(1, 0, 1, 1)
+layout_mode = 2
+text = "\"Pinky\"
+"
+
+[node name="TextureRect3" type="TextureRect" parent="ColorRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("5_nlgih")
+
+[node name="Label7" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(0, 0.917647, 0.921569, 1)
+layout_mode = 2
+text = "- Bashful
+"
+
+[node name="Control4" type="Control" parent="ColorRect/GridContainer"]
+layout_mode = 2
+
+[node name="Label9" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(0, 0.917647, 0.921569, 1)
+layout_mode = 2
+text = "\"Inky\""
+
+[node name="TextureRect4" type="TextureRect" parent="ColorRect/GridContainer"]
+layout_mode = 2
+texture = ExtResource("6_nlgih")
+
+[node name="Label10" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(1, 0.498039, 0.313726, 1)
+layout_mode = 2
+text = "- Pokey"
+
+[node name="Control5" type="Control" parent="ColorRect/GridContainer"]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="ColorRect/GridContainer"]
+modulate = Color(1, 0.498039, 0.313726, 1)
+layout_mode = 2
+text = "\"Clyde\""
+
+[node name="GridContainer2" type="GridContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 80.0
+offset_right = 16.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 5
+columns = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("7_2mbqw")
+
+[node name="Label" type="Label" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+text = "10"
+
+[node name="Label2" type="Label" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+text = "pts"
+
+[node name="TextureRect2" type="TextureRect" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+texture = ExtResource("8_phbiq")
+
+[node name="Label3" type="Label" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+text = "50"
+
+[node name="Label4" type="Label" parent="ColorRect/GridContainer2"]
+layout_mode = 2
+text = "pts"
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -96.0
+offset_top = -23.0
+offset_right = 104.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "< Press any button to start >
+"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Label"]
+libraries = {
+&"": SubResource("AnimationLibrary_0qrr1")
+}
+autoplay = "bliking"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="SpritePacman" type="Sprite2D" parent="Control"]
+position = Vector2(248, -40)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("7_n5wuq")
+hframes = 13
+frame = 4
+
+[node name="AnimationPlayerPacman" type="AnimationPlayer" parent="Control"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_py3wb"),
+&"intro": SubResource("AnimationLibrary_2mbqw")
+}
+autoplay = "eat"
+
+[node name="Blinky" type="Sprite2D" parent="Control"]
+position = Vector2(296, -40)
+scale = Vector2(-1, 1)
+texture = ExtResource("3_d8n41")
+
+[node name="AnimationPlayerWalk" type="AnimationPlayer" parent="Control"]
+libraries = {
+&"": SubResource("AnimationLibrary_phbiq")
+}
+autoplay = "walk"
+speed_scale = 1.5
+
+[node name="Bashful" type="Sprite2D" parent="Control"]
+position = Vector2(336, -40)
+scale = Vector2(-1, 1)
+texture = ExtResource("5_nlgih")
+
+[node name="Pokey" type="Sprite2D" parent="Control"]
+position = Vector2(368, -40)
+texture = ExtResource("6_nlgih")
+
+[node name="Speedy" type="Sprite2D" parent="Control"]
+position = Vector2(368, -40)
+scale = Vector2(-1, 1)
+texture = ExtResource("4_j6on6")

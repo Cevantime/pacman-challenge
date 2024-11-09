@@ -15,5 +15,5 @@ border_width_bottom = 2
 
 [resource]
 default_font = ExtResource("1_so5tp")
-default_font_size = 16
+default_font_size = 20
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_65qxk")

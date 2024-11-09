@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Challenge Pacman"
-run/main_scene="res://gameplay.tscn"
+run/main_scene="res://intro_layer.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,17 +19,28 @@ config/icon="res://icon.svg"
 
 LeaderBoard="*res://addons/leader_board/leader_board.gd"
 GlobalState="*res://lib/global_state/global_state.gd"
+SpeedChart="*res://speed_chart.gd"
 
 [display]
 
 window/size/viewport_width=896
-window/size/viewport_height=1144
+window/size/viewport_height=1152
 window/stretch/mode="canvas_items"
 window/stretch/scale=2.0
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_states/plugin.cfg", "res://addons/kanban_tasks/plugin.cfg", "res://addons/leader_board/plugin.cfg", "res://addons/tile_bit_tools/plugin.cfg")
+
+[global_group]
+
+moving=""
+pacman=""
+phantom=""
+blinky=""
+character_spawner=""
+pokey=""
+bonus=""
 
 [input]
 

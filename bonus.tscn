@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://d8tbmlbneodb"]
+
+[ext_resource type="Texture2D" uid="uid://sfjup4w437b5" path="res://asset/bonus/cherries.png" id="1_7ah8e"]
+[ext_resource type="Script" path="res://bonus.gd" id="2_fix7m"]
+
+[node name="Bonus" type="Sprite2D" groups=["bonus"]]
+texture = ExtResource("1_7ah8e")
+script = ExtResource("2_fix7m")
+
+[node name="DeleteTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

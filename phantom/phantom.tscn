@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://b3uwsfrxm74k2"]
+
+[ext_resource type="PackedScene" uid="uid://bu6c7r44rev4y" path="res://moving_character.tscn" id="1_0gj4p"]
+[ext_resource type="Script" path="res://phantom/phantom.gd" id="2_tymo3"]
+[ext_resource type="Texture2D" uid="uid://c7wfuvoskoent" path="res://asset/phantom/phantom-body.png" id="3_ietmr"]
+[ext_resource type="Texture2D" uid="uid://dsrah0bjy1fgc" path="res://asset/phantom/phantom-eye.png" id="4_6a82l"]
+[ext_resource type="Texture2D" uid="uid://bcg3kwtsmkg8p" path="res://asset/pacman/frightened.png" id="5_woxi6"]
+
+[sub_resource type="Animation" id="Animation_ke8sw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rendering/SpriteBody:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_jgrg5"]
+resource_name = "run"
+length = 0.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rendering/SpriteBody:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2v1o1"]
+_data = {
+&"RESET": SubResource("Animation_ke8sw"),
+&"run": SubResource("Animation_jgrg5")
+}
+
+[sub_resource type="Animation" id="Animation_ietmr"]
+resource_name = "wait"
+length = 0.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rendering:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rendering/SpriteEyes:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+
+[sub_resource type="Animation" id="Animation_6a82l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Rendering:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Rendering/SpriteEyes:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgrg5"]
+_data = {
+&"wait": SubResource("Animation_ietmr"),
+&"RESET": SubResource("Animation_6a82l")
+}
+
+[node name="Phantom" groups=["phantom"] instance=ExtResource("1_0gj4p")]
+script = ExtResource("2_tymo3")
+nickname = ""
+debug_target = false
+
+[node name="Rendering" type="Node2D" parent="." index="0"]
+unique_name_in_owner = true
+
+[node name="SpriteBody" type="Sprite2D" parent="Rendering" index="0"]
+unique_name_in_owner = true
+texture = ExtResource("3_ietmr")
+hframes = 2
+
+[node name="SpriteEyes" type="Sprite2D" parent="Rendering" index="1"]
+unique_name_in_owner = true
+texture = ExtResource("4_6a82l")
+hframes = 4
+frame = 3
+
+[node name="SpriteFrightened" type="Sprite2D" parent="Rendering" index="2"]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("5_woxi6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+&"": SubResource("AnimationLibrary_2v1o1")
+}
+autoplay = "run"
+
+[node name="WaitAnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_jgrg5")
+}
