@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://dh2nkkt5r6txm"]
+[gd_scene load_steps=30 format=4 uid="uid://dh2nkkt5r6txm"]
 
 [ext_resource type="TileSet" uid="uid://javofidtvf0r" path="res://asset/map/gameplay.tres" id="1_ej4tk"]
 [ext_resource type="Script" path="res://gameplay.gd" id="1_xuee5"]
@@ -19,6 +19,11 @@
 [ext_resource type="AudioStream" uid="uid://dmp8u0v2p32cu" path="res://asset/sounds/intro.ogg" id="17_7y1a3"]
 [ext_resource type="AudioStream" uid="uid://w225v6j2x2bs" path="res://asset/sounds/eat_dot.wav" id="18_eglai"]
 [ext_resource type="AudioStream" uid="uid://bj0qd8rp0w7bs" path="res://asset/sounds/eat_big_dot.wav" id="19_m1ld8"]
+[ext_resource type="AudioStream" uid="uid://ct478e42gurc8" path="res://asset/sounds/eat_bonus.wav" id="20_2em84"]
+[ext_resource type="AudioStream" uid="uid://bkj6e50hm384k" path="res://asset/sounds/eat_phantom.wav" id="21_0kugc"]
+[ext_resource type="AudioStream" uid="uid://548oha1qhbw3" path="res://asset/sounds/alarm.wav" id="22_hwi80"]
+[ext_resource type="AudioStream" uid="uid://bm35ywey5cupw" path="res://asset/sounds/pacman_death.wav" id="23_td3eq"]
+[ext_resource type="AudioStream" uid="uid://busb4baldpvh2" path="res://asset/sounds/invicible.wav" id="24_yr68n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xuee5"]
 texture = ExtResource("2_oe8ih")
@@ -166,18 +171,44 @@ text = "READY !"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IntroAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayers" type="Node" parent="."]
+
+[node name="IntroAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("17_7y1a3")
 
-[node name="DotAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="DotAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("18_eglai")
+volume_db = -11.92
 
-[node name="BigDotAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="BigDotAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
 unique_name_in_owner = true
 stream = ExtResource("19_m1ld8")
+
+[node name="BonusAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("20_2em84")
+
+[node name="EatPhantomAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("21_0kugc")
+
+[node name="AlarmAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("22_hwi80")
+autoplay = true
+
+[node name="PacmanDeathAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("23_td3eq")
+
+[node name="InvincibleAudioStreamPlayer" type="AudioStreamPlayer" parent="AudioStreamPlayers"]
+unique_name_in_owner = true
+stream = ExtResource("24_yr68n")
 
 [connection signal="timeout" from="PhaseTimer" to="." method="_on_phase_timer_timeout"]
 [connection signal="timeout" from="FrightenTimer" to="." method="_on_frighten_timer_timeout"]
@@ -186,4 +217,4 @@ stream = ExtResource("19_m1ld8")
 [connection signal="spawned" from="PacmanSpawner" to="." method="_on_pacman_spawner_spawned"]
 [connection signal="spawned" from="BonusSpawner" to="." method="_on_bonus_spawner_spawned"]
 [connection signal="timeout" from="LastEatTimer" to="." method="_on_last_eat_timer_timeout"]
-[connection signal="finished" from="IntroAudioStreamPlayer" to="." method="_on_intro_audio_stream_player_finished"]
+[connection signal="finished" from="AudioStreamPlayers/IntroAudioStreamPlayer" to="." method="_on_intro_audio_stream_player_finished"]

@@ -33,15 +33,13 @@ func _process(_delta):
 		move_input = Vector2(0, m.y)
 	
 	for ph in get_tree().get_nodes_in_group("phantom"):
-		if position.distance_to(ph.position) < 10.0:
-			if ph.frightened:
-				ph.eaten()
-				get_tree().paused = true
-				await get_tree().create_timer(0.4).timeout
-				get_tree().paused = false
+		var d = position.distance_to(ph.position)
+		if d < 16.0 and ph.frightened:
+			ph.eaten()
+
 				
-			elif ph.state != Phantom.STATES.GO_HOUSE and not dead:
-				context.pacman_eaten()
+		elif d < 10.0 and ph.state != Phantom.STATES.GO_HOUSE and not dead:
+			context.pacman_eaten()
 				
 	var bonus = get_tree().get_first_node_in_group("bonus")
 	

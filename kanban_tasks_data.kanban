@@ -18,7 +18,9 @@
 		{
 			"uuid": "c3721904-ed76-451f-9348-c3def44e5a99",
 			"title": "Doing",
-			"tasks": []
+			"tasks": [
+				"12a96304-b035-4579-b072-d29f292665ee"
+			]
 		},
 		{
 			"uuid": "ec1b36c5-f6b2-42f4-9164-dd9fe226678b",
@@ -121,6 +123,13 @@
 			"uuid": "9b4699d3-c1c8-44ac-9a61-963e2ffc8793",
 			"title": "Dimensions",
 			"description": "Classic : 896x1152\nGoogle : 1872*704",
+			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
+			"steps": []
+		},
+		{
+			"uuid": "12a96304-b035-4579-b072-d29f292665ee",
+			"title": "add sounds",
+			"description": "",
 			"category": "27532680-3a66-4948-a00d-7638817cf1aa",
 			"steps": []
 		}

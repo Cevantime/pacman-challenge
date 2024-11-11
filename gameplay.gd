@@ -16,10 +16,16 @@ const Phantom = preload("res://phantom/phantom.gd")
 @onready var intro_audio_stream_player: AudioStreamPlayer = %IntroAudioStreamPlayer
 @onready var dot_audio_stream_player: AudioStreamPlayer = %DotAudioStreamPlayer
 @onready var big_dot_audio_stream_player: AudioStreamPlayer = %BigDotAudioStreamPlayer
+@onready var bonus_audio_stream_player: AudioStreamPlayer = %BonusAudioStreamPlayer
+@onready var eat_phantom_audio_stream_player: AudioStreamPlayer = %EatPhantomAudioStreamPlayer
+@onready var alarm_audio_stream_player: AudioStreamPlayer = %AlarmAudioStreamPlayer
+@onready var pacman_death_audio_stream_player: AudioStreamPlayer = %PacmanDeathAudioStreamPlayer
+@onready var invincible_audio_stream_player: AudioStreamPlayer = %InvincibleAudioStreamPlayer
 
 @export var pacman_invicible := false
 
 const pop_label_scene = preload("res://popping_label.tscn")
+const point_phantom = 200
 
 var phase_timer_time_left
 var aStarGridGoOut = AStarGrid2D.new()
@@ -29,11 +35,11 @@ var phase_index = 0
 var current_state_phase = Phantom.STATES.CHASE
 
 var original_dot_count
-var point_acc = 200
 var global_dot_counter := Counter.new()
 var bonus_dot_counter := Counter.new()
 var time_last_eat_counter := Counter.new()
 var all_four = 0
+var point_phantom_acc = 0
 
 func _ready() -> void:
 	bonus_dot_counter.limit = 10000
@@ -126,6 +132,8 @@ func _process(delta: float) -> void:
 	
 	
 func _on_dot_eaten(big):
+	var dot_ratio = float(original_dot_count - get_remaining_dots_count()) / float(original_dot_count)
+	alarm_audio_stream_player.pitch_scale = 1.0 + round(dot_ratio * 4.0) / 4.0
 	if big:
 		big_dot_audio_stream_player.play()
 	else:
@@ -199,6 +207,8 @@ func pacman_eaten():
 		ph.hide()
 		ph.abort_move()
 		
+	pacman_death_audio_stream_player.play()
+	
 	await pacman.die()
 	
 	GlobalState.lives -= 1
@@ -227,14 +237,15 @@ func reset_everyone():
 	
 	
 func trigger_frighten():
-	point_acc = 200
+	point_phantom_acc = 0
 	if not phase_timer.is_stopped():
 		phase_timer_time_left = phase_timer.time_left
 		phase_timer.stop()
 	for ph in get_tree().get_nodes_in_group("phantom"):
 		ph.get_frightened()
 	frighten_timer.start()
-
+	alarm_audio_stream_player.stop()
+	invincible_audio_stream_player.play()
 
 func _on_phase_timer_timeout() -> void:
 	set_up_phase()
@@ -244,9 +255,11 @@ func _on_phase_timer_timeout() -> void:
 
 
 func _on_frighten_timer_timeout() -> void:
-	point_acc = 200
+	point_phantom_acc = 0
 	phase_timer.wait_time = phase_timer_time_left
 	phase_timer.start()
+	invincible_audio_stream_player.stop()
+	alarm_audio_stream_player.play()
 	for ph in get_tree().get_nodes_in_group("phantom"):
 		ph.leave_frighten()
 
@@ -268,6 +281,7 @@ func _on_menu_restart_requested() -> void:
 	get_tree().reload_current_scene()
 
 func _on_bonus_eaten(bonus):
+	bonus_audio_stream_player.play()
 	GlobalState.score += bonus.points
 	pop_label(str(bonus.points))
 	
@@ -275,15 +289,21 @@ func get_remaining_dots_count():
 	return objects_layer.get_used_cells_by_id(1).size()
 
 func _on_moving_eaten():
-	GlobalState.score += point_acc
-	pop_label(str(point_acc))
-	if point_acc == 1600:
+	var point_inc = point_phantom * pow(2, point_phantom_acc)
+	GlobalState.score += point_inc
+	pop_label(str(point_inc))
+	eat_phantom_audio_stream_player.pitch_scale = 1.0 + point_phantom_acc * 0.2
+	point_phantom_acc += 1
+	eat_phantom_audio_stream_player.play()
+	if point_phantom_acc == 4:
 		all_four += 1
 		if all_four == 4:
 			GlobalState.score += 12000
 			await get_tree().create_timer(0.4).timeout
 			pop_label(str(12000))
-	point_acc *= 2
+	get_tree().paused = true
+	await get_tree().create_timer(0.4).timeout
+	get_tree().paused = false
 	
 func pop_label(text, node = null):
 	var pop_label = pop_label_scene.instantiate()
@@ -307,6 +327,7 @@ func _on_time_last_eat_counter_limit_reached():
 	var next_ghost = get_next_preferred_ghost()
 	if next_ghost != null:
 		next_ghost.state = Phantom.STATES.GO_OUT
+
 
 func _on_bonus_dot_counter_incremented(count):
 	if count in [70, 170]:

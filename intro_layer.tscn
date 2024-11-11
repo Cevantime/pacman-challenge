@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bh2hgwyeueb2i"]
+[gd_scene load_steps=21 format=3 uid="uid://bh2hgwyeueb2i"]
 
 [ext_resource type="Script" path="res://intro_layer.gd" id="1_dd3i3"]
 [ext_resource type="Theme" uid="uid://buclk0ly46ywm" path="res://lib/default_theme/default_theme.tres" id="2_vcyja"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bjxall1gwmbi2" path="res://asset/ui/dots-texture.png" id="7_2mbqw"]
 [ext_resource type="Texture2D" uid="uid://dbifx7h2h3ia2" path="res://asset/pacman/pacman-sheet.png" id="7_n5wuq"]
 [ext_resource type="Texture2D" uid="uid://c84heha4u4h56" path="res://asset/ui/poxerup-texture.png" id="8_phbiq"]
+[ext_resource type="AudioStream" uid="uid://w225v6j2x2bs" path="res://asset/sounds/eat_dot.wav" id="10_2mbqw"]
 
 [sub_resource type="Animation" id="Animation_phbiq"]
 length = 0.001
@@ -44,8 +45,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0qrr1"]
 _data = {
-&"RESET": SubResource("Animation_phbiq"),
-&"bliking": SubResource("Animation_2mbqw")
+"RESET": SubResource("Animation_phbiq"),
+"bliking": SubResource("Animation_2mbqw")
 }
 
 [sub_resource type="Animation" id="Animation_rhrnx"]
@@ -83,8 +84,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_py3wb"]
 _data = {
-&"RESET": SubResource("Animation_rhrnx"),
-&"eat": SubResource("Animation_0qrr1")
+"RESET": SubResource("Animation_rhrnx"),
+"eat": SubResource("Animation_0qrr1")
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2mbqw"]
@@ -243,8 +244,8 @@ tracks/5/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_phbiq"]
 _data = {
-&"RESET": SubResource("Animation_h0fo2"),
-&"walk": SubResource("Animation_n5wuq")
+"RESET": SubResource("Animation_h0fo2"),
+"walk": SubResource("Animation_n5wuq")
 }
 
 [node name="IntroLayer" type="CanvasLayer"]
@@ -283,6 +284,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="ColorRect"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -315,10 +317,12 @@ layout_mode = 2
 text = "Nickname"
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/GridContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("3_d8n41")
 
 [node name="Label4" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(0.980392, 0, 0, 1)
 layout_mode = 2
 text = "- Shadow"
@@ -327,15 +331,18 @@ text = "- Shadow"
 layout_mode = 2
 
 [node name="Label5" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(0.980392, 0, 0, 1)
 layout_mode = 2
 text = "\"Blinky\""
 
 [node name="TextureRect2" type="TextureRect" parent="ColorRect/GridContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("4_j6on6")
 
 [node name="Label6" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(1, 0, 1, 1)
 layout_mode = 2
 text = "- Speedy"
@@ -344,16 +351,19 @@ text = "- Speedy"
 layout_mode = 2
 
 [node name="Label8" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(1, 0, 1, 1)
 layout_mode = 2
 text = "\"Pinky\"
 "
 
 [node name="TextureRect3" type="TextureRect" parent="ColorRect/GridContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("5_nlgih")
 
 [node name="Label7" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(0, 0.917647, 0.921569, 1)
 layout_mode = 2
 text = "- Bashful
@@ -363,15 +373,18 @@ text = "- Bashful
 layout_mode = 2
 
 [node name="Label9" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(0, 0.917647, 0.921569, 1)
 layout_mode = 2
 text = "\"Inky\""
 
 [node name="TextureRect4" type="TextureRect" parent="ColorRect/GridContainer"]
+visible = false
 layout_mode = 2
 texture = ExtResource("6_nlgih")
 
 [node name="Label10" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(1, 0.498039, 0.313726, 1)
 layout_mode = 2
 text = "- Pokey"
@@ -380,6 +393,7 @@ text = "- Pokey"
 layout_mode = 2
 
 [node name="Label11" type="Label" parent="ColorRect/GridContainer"]
+visible = false
 modulate = Color(1, 0.498039, 0.313726, 1)
 layout_mode = 2
 text = "\"Clyde\""
@@ -404,6 +418,7 @@ columns = 3
 [node name="TextureRect" type="TextureRect" parent="ColorRect/GridContainer2"]
 layout_mode = 2
 texture = ExtResource("7_2mbqw")
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="ColorRect/GridContainer2"]
 layout_mode = 2
@@ -416,6 +431,7 @@ text = "pts"
 [node name="TextureRect2" type="TextureRect" parent="ColorRect/GridContainer2"]
 layout_mode = 2
 texture = ExtResource("8_phbiq")
+stretch_mode = 5
 
 [node name="Label3" type="Label" parent="ColorRect/GridContainer2"]
 layout_mode = 2
@@ -442,7 +458,7 @@ text = "< Press any button to start >
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect/Label"]
 libraries = {
-&"": SubResource("AnimationLibrary_0qrr1")
+"": SubResource("AnimationLibrary_0qrr1")
 }
 autoplay = "bliking"
 
@@ -469,8 +485,8 @@ frame = 4
 [node name="AnimationPlayerPacman" type="AnimationPlayer" parent="Control"]
 root_node = NodePath("../..")
 libraries = {
-&"": SubResource("AnimationLibrary_py3wb"),
-&"intro": SubResource("AnimationLibrary_2mbqw")
+"": SubResource("AnimationLibrary_py3wb"),
+"intro": SubResource("AnimationLibrary_2mbqw")
 }
 autoplay = "eat"
 
@@ -481,7 +497,7 @@ texture = ExtResource("3_d8n41")
 
 [node name="AnimationPlayerWalk" type="AnimationPlayer" parent="Control"]
 libraries = {
-&"": SubResource("AnimationLibrary_phbiq")
+"": SubResource("AnimationLibrary_phbiq")
 }
 autoplay = "walk"
 speed_scale = 1.5
@@ -499,3 +515,7 @@ texture = ExtResource("6_nlgih")
 position = Vector2(368, -40)
 scale = Vector2(-1, 1)
 texture = ExtResource("4_j6on6")
+
+[node name="EatAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_2mbqw")

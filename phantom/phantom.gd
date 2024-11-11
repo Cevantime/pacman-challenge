@@ -2,6 +2,8 @@ extends "res://moving_character.gd"
 
 signal was_eaten
 
+@onready var go_home_audio_stream_player: AudioStreamPlayer = %GoHomeAudioStreamPlayer
+
 var state:
 	set(v):
 		var old = state
@@ -35,6 +37,7 @@ var frightened = false:
 		
 var direction = Vector2i(-1,0)
 var turn_back = false
+var current_path
 
 @export var nickname : String:
 	set(v):
@@ -228,9 +231,16 @@ func adapt_eyes(dir):
 func go_out():
 	wait_animation_player.stop()
 	move_tween = create_tween()
-	await move_tween.tween_property(rendering, "position",Vector2.ZERO, 16.0/get_speed()).finished
-	var path = context.aStarGridGoOut.get_point_path(map_position, context.zones_layer.get_used_cells_by_id(0, Vector2i(7,0))[0])
+	move_tween.tween_property(rendering, "position",Vector2.ZERO, 16.0/get_speed())
+	move_tween.finished.connect(_on_special_move_finished)
 	
+	
+func get_out_target():
+	return context.zones_layer.get_used_cells_by_id(0, Vector2i(7,0))[0]
+	
+	
+func _on_special_move_finished():
+	move_tween.finished.disconnect(_on_special_move_finished)
 	if state == STATES.WAIT:
 		position = original_position
 		return
@@ -238,27 +248,18 @@ func go_out():
 		check_move()
 		return
 		
-	for i in range(1, path.size()):
-		var p = path[i]
+	if state == STATES.GO_OUT:
+		if current_path == null:
+			current_path = Array(context.aStarGridGoOut.get_point_path(map_position, get_out_target()))
+			current_path.pop_front()
+		elif current_path.is_empty():
+			state = STATES.REPLACE
+			current_path = null
+			return
+		var p = current_path.pop_front()
 		adapt_eyes(Vector2i((p - position).normalized()))
-		var t = make_move(p)
-		await t.finished
-		if state == STATES.WAIT:
-			position = original_position
-			return
-		elif state > STATES.GO_OUT:
-			check_move()
-			return
-	
-	if state == STATES.WAIT:
-		position = original_position
-		return
-	elif state > STATES.GO_OUT:
-		check_move()
-		return
-	state = STATES.REPLACE
-	
-	
+		move_tween = make_move(p)
+		move_tween.finished.connect(_on_special_move_finished)
 	
 func replace():
 	var dir = get_dir_to(get_target())
@@ -282,6 +283,9 @@ func start_waiting():
 
 
 func _enter_state(new_state, previous_state):
+	if previous_state in [STATES.GO_HOUSE, STATES.GO_IN]:
+		go_home_audio_stream_player.stop()
+		sprite_body.show()
 	var turn_back_states = [STATES.SCATTER, STATES.CHASE]
 	if new_state in turn_back_states and previous_state in turn_back_states:
 		turn_back = true
@@ -312,6 +316,7 @@ func eaten():
 	frightened = false
 	just_eaten = true
 	state = STATES.GO_HOUSE
+	go_home_audio_stream_player.play()
 	sprite_body.modulate = original_modulate
 	sprite_eyes.show()
 	sprite_frightened.hide()
@@ -319,26 +324,34 @@ func eaten():
 	was_eaten.emit()
 
 func go_in():
-	var path = context.aStarGridGoOut.get_point_path(map_position, get_wait_position())
-	
-	for i in range(1, path.size()):
-		var p = path[i]
-		adapt_eyes(Vector2i((p - position).normalized()))
-		await make_move(p).finished
-		if state != STATES.GO_IN:
-			if state == STATES.WAIT:
-				position = original_position
-				return
-			elif state > STATES.GO_OUT:
-				check_move()
-				return
+	if move_tween.finished.is_connected(go_in):
+		move_tween.finished.disconnect(go_in)
+	if state != STATES.GO_IN:
+		if state == STATES.WAIT:
+			position = original_position
+			return
+		elif state > STATES.GO_OUT:
+			check_move()
+			return
+	if current_path == null:
+		current_path = Array(context.aStarGridGoOut.get_point_path(map_position, get_wait_position()))
+		current_path.pop_front()
+	elif current_path.is_empty():
+		move_tween = make_move(position - Vector2(0, 8))
+		move_tween.finished.connect(finish_go_in)
+		return
 		
-	await make_move(position - Vector2(0, 8)).finished
+	var p = current_path.pop_front()
+	adapt_eyes(Vector2i((p - position).normalized()))
+	move_tween = make_move(p)
+	move_tween.finished.connect(go_in)
 	
-	sprite_body.show()
-	
-	state = STATES.GO_OUT
 
+func finish_go_in():
+	current_path = null
+	sprite_body.show()
+	state = STATES.GO_OUT
+	go_home_audio_stream_player.stop()
 
 func get_wait_position():
 	return wait_position if wait_position != null else local_to_map(context.default_wait_pos.position)
